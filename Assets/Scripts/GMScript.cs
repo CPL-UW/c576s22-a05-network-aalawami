@@ -40,6 +40,8 @@ public class GMScript : NetworkBehaviour
     private bool _networkStarted;
     private bool _networkRegistered;
 
+    private bool optAdd = false;
+
     public GMScript()
     {
         _myPiece = null;
@@ -87,6 +89,7 @@ public class GMScript : NetworkBehaviour
         }
     }
 
+    
     private const string MSG_TYPE_CHUNK = "CHUNK";
     private const string MSG_TYPE_PIECE = "PIECE";
 
@@ -99,6 +102,8 @@ public class GMScript : NetworkBehaviour
     {
         SendMessageToAll(MSG_TYPE_PIECE,v2s(_myPiece));
     }
+
+   
 
     void DoNetworkUpdate()
     {
@@ -172,6 +177,8 @@ public class GMScript : NetworkBehaviour
         {
             infoText.text = s.Message;
         }
+
+        if (_needAdd) { _myChunk = AddRow(_hBounds, myChunk); _needAdd = false; }
 
         if (0 != _fixedUpdateCount++ % _fixedUpdateFramesToWait) return;
         

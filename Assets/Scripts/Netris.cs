@@ -26,6 +26,7 @@ public static class Netris
 
     public static bool VEquals(Vector3Int[] a, Vector3Int[] b)
     {
+        // test.
         if (a == b) return true;
         if (a == null || b == null) return false;
         return a.All(b.Contains) && b.All(a.Contains);
